@@ -10,7 +10,7 @@ class AnomalyDetectionPipeline {
   constructor(config = {}) {
     this.client = new OpenAI({
       baseURL: config.baseURL || 'https://api.featherless.ai/v1',
-      apiKey: config.apiKey || process.env.FEATHERLESS_API_KEY || 'rc_4f027275f3f72b7bbc8ee4c449a9f721bf8bea5e9f4a1bfe168439c883fb1b7f',
+      apiKey: config.apiKey || process.env.FEATHERLESS_API_KEY || 'KEY GOES HERE',
     });
     this.model = config.model || 'deepseek-ai/DeepSeek-V3.2';
     this.maxTokens = config.maxTokens || 4096;
