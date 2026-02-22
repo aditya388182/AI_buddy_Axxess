@@ -7,12 +7,14 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./database');
-const logger = require('./old_stuff/helper/logger');
-const ErrorHandler = require('./old_stuff/helper/errorHandler');
+const logger = require('./utils/logger');
+const ErrorHandler = require('./utils/errorHandler');
 
 // Import routes
 const dataIngestionRoutes = require('./routes/dataIngestion');
 const whoDataRoutes = require('./routes/whoData');
+const anomalyDetectionRoutes = require('./routes/anomalyDetection');
+const dataTransformationRoutes = require('./routes/dataTransformation');
 
 // Initialize Express app
 const app = express();
@@ -24,8 +26,11 @@ if (process.env.NODE_ENV === 'development') {
   logger.setLevel('INFO');
 }
 
-// Connect to MongoDB
-connectDB();
+// Connect to MongoDB (non-blocking)
+connectDB().catch(err => {
+  logger.error('Failed to connect to MongoDB', { error: err.message });
+  // Continue running even if DB connection fails
+});
 
 // Middleware
 app.use(cors());
@@ -54,6 +59,8 @@ app.get('/health', (req, res) => {
 // API Routes
 app.use('/api/ingestion', dataIngestionRoutes);
 app.use('/api/who', whoDataRoutes);
+app.use('/api/anomaly', anomalyDetectionRoutes);
+app.use('/api/transform', dataTransformationRoutes);
 
 // 404 handler
 app.use(ErrorHandler.notFound());

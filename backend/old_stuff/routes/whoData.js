@@ -5,7 +5,7 @@
 
 const express = require('express');
 const whoDataService = require('../library/whoDataService');
-const HealthIndicator = require('../models/HealthIndicator');
+const HealthIndicator = require('../old_stuff/models/HealthIndicator');
 const logger = require('../old_stuff/helper/logger');
 
 const router = express.Router();
