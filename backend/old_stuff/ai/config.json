@@ -1,0 +1,28 @@
+{
+  "analysis": {
+    "min_points_per_series": 6,
+    "trend_slope_threshold": 0.02,
+    "stability_std_threshold": 1.5
+  },
+  "thresholds": {
+    "default": {
+      "zscore": {
+        "low": 2.0,
+        "medium": 3.0,
+        "high": 4.0
+      }
+    },
+    "M_004": {
+      "zscore": {
+        "low": 2.0,
+        "medium": 3.0,
+        "high": 4.0
+      }
+    }
+  },
+  "model": {
+    "epochs": 50,
+    "batch_size": 32,
+    "learning_rate": 0.001
+  }
+}
